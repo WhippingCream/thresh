@@ -27,7 +27,12 @@ const getLoginCookies = async (id, password) => {
       .sendKeys(password, Key.RETURN);
     await driver.wait(until.titleIs("리그 오브 레전드"), 10000);
 
-    return await driver.manage().getCookies();
+    const cookies = await driver.manage().getCookies();
+    let ret = {};
+    for (const cookie of cookies) {
+      ret[cookie.name] = cookie.value;
+    }
+    return ret;
   } catch (e) {
     console.log(JSON.stringify(e));
   } finally {
@@ -36,19 +41,9 @@ const getLoginCookies = async (id, password) => {
 };
 
 const getLoginToken = async (id, password) => {
-  try {
-    const cookies = await getLoginCookies(id, password);
-    for (const cookie of cookies) {
-      if (cookie.name == "id_token") return cookie.value;
-    }
-
-    return "";
-  } catch (e) {
-    console.log(JSON.stringify(e));
-  } finally {
-    await driver.quit();
-  }
+  const cookies = await getLoginCookies(id, password);
+  return cookies["id_token"];
 };
 
-module.exports.getLoginCookie = getLoginCookies;
+module.exports.getLoginCookies = getLoginCookies;
 module.exports.getLoginToken = getLoginToken;
