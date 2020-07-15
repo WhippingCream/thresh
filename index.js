@@ -4,17 +4,17 @@ require("dotenv").config();
 
 const chrome = require("selenium-webdriver/chrome");
 
-const options = new chrome.Options().addArguments(
-  "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
-);
-
-const driver = new Builder()
-  .forBrowser("chrome")
-  .usingServer(`http://${process.env.SELENIUM_URI}`)
-  .setChromeOptions(options)
-  .build();
-
 const getLoginCookies = async (id, password) => {
+  const options = new chrome.Options().addArguments(
+    "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+  );
+
+  const driver = new Builder()
+    .forBrowser("chrome")
+    .usingServer(`http://${process.env.SELENIUM_URI}`)
+    .setChromeOptions(options)
+    .build();
+
   try {
     await driver.get("https://kr.leagueoflegends.com/ko-kr/");
     await driver.manage().window().maximize();
