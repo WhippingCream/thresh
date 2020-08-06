@@ -11,7 +11,7 @@ const getLoginCookies = async (id, password) => {
 
   const driver = new Builder()
     .forBrowser("chrome")
-    .usingServer(`http://${process.env.SELENIUM_URI}`)
+    .usingServer(process.env.SELENIUM_URI)
     .setChromeOptions(options)
     .build();
 
