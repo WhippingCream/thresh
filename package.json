@@ -1,20 +1,20 @@
 {
-  "dependencies": {
-    "selenium-webdriver": "^4.0.0-alpha.7",
-    "dotenv": "*"
-  },
-  "name": "thresh",
-  "description": "selenium-webdriver module set",
+  "name": "@whipping-cream/thresh",
   "version": "1.0.0",
+  "description": "selenium-webdriver module set",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
+  },
+  "dependencies": {
+    "dotenv": "*",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WhippingCream/thresh.git"
   },
-  "author": "",
+  "author": "8eatles",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/WhippingCream/thresh/issues"
