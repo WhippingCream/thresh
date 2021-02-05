@@ -15,29 +15,22 @@ const getLoginCookies = async (id, password) => {
     .setChromeOptions(options)
     .build();
 
-  try {
-    await driver.get("https://kr.leagueoflegends.com/ko-kr/");
-    await driver.manage().window().maximize();
-    await driver.wait(until.elementLocated(By.linkText("로그인")));
-    await driver.findElement(By.linkText("로그인")).click();
-    await driver.wait(until.elementLocated(By.name("username")), 10000);
-    await driver.findElement(By.name("username")).sendKeys(id);
-    await driver
-      .findElement(By.name("password"))
-      .sendKeys(password, Key.RETURN);
-    await driver.wait(until.titleIs("리그 오브 레전드"), 10000);
+  await driver.get("https://kr.leagueoflegends.com/ko-kr/");
+  await driver.manage().window().maximize();
+  await driver.wait(until.elementLocated(By.linkText("로그인")));
+  await driver.findElement(By.linkText("로그인")).click();
+  await driver.wait(until.elementLocated(By.name("username")), 10000);
+  await driver.findElement(By.name("username")).sendKeys(id);
+  await driver.findElement(By.name("password")).sendKeys(password, Key.RETURN);
+  await driver.wait(until.titleIs("리그 오브 레전드"), 10000);
 
-    const cookies = await driver.manage().getCookies();
-    let ret = {};
-    for (const cookie of cookies) {
-      ret[cookie.name] = cookie.value;
-    }
-    return ret;
-  } catch (e) {
-    console.log(JSON.stringify(e));
-  } finally {
-    await driver.quit();
+  const cookies = await driver.manage().getCookies();
+  await driver.quit();
+  let ret = {};
+  for (const cookie of cookies) {
+    ret[cookie.name] = cookie.value;
   }
+  return ret;
 };
 
 const getLoginToken = async (id, password) => {
