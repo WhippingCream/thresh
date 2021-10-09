@@ -42,7 +42,7 @@ const getLoginCookies = async (id, password) => {
 
 const getLoginToken = async (id, password) => {
   const cookies = await getLoginCookies(id, password);
-  return cookies["id_token"];
+  return cookies["__Secure-id_token"];
 };
 
 module.exports.getLoginCookies = getLoginCookies;
